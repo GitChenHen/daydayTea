@@ -1,0 +1,125 @@
+<div class="nav_res" style="background-color: #ccc;" th:fragment="html">
+    <script>
+        $(function(){
+            var data4Vue = {
+                uri:'fore_register',
+                result: [],
+                user:{name:'', password:'', repeatpassword:'', phone:'', email:'', code:''},
+                send: {email:'', name:''}
+            };
+            //ViewModel
+            var vue = new Vue({
+                el: '#workingArea',
+                data: data4Vue,
+                mounted:function(){
+                },
+                methods: {
+                    register:function(){
+                        var flag = validate();
+                        if(flag){
+                            axios.post(this.uri,this.user).then(function(response) {
+                                var result = response.data;
+                                if(result.code==0){
+                                    window.alert("注册成功！");
+                                    location.href="login";
+                                }
+                                else{
+                                    alert(response.data);
+                                }
+                            });
+                            return true;
+                        }
+                        return  false;
+                    },
+                    sendCode: function () {
+                        var url = "fore_send_code";
+                        this.send.name = this.user.name;
+                        this.send.email = this.user.email;
+                        axios.post(url,this.send).then(function (response) {
+                            alert(response.data);
+                        })
+                    }
+                }
+            });
+        });
+        layui.use(['layer'],function () {
+            var layer = layui.layer;
+        })
+        // 校验用户名、密码、邮箱、手机号码
+        function validate() {
+            var Username = $('#username').val();
+            var Password = $('#password').val();
+            var rePassword = $('#repassword').val();
+            var Email = $('#email').val();
+            var Phone = $('#phone').val();
+            var Code = $('#code').val();
+            //校验账号
+            if ($.trim(Username) == '' || $.trim(Username).length<=0){
+                layer.alert("用户名不能为空");
+                return false;
+            }
+            if($.trim(Username).length>15 || $.trim(Username).length<3 || $.trim(Username).toString() == null ){
+                layer.alert("用户名只能是3-15位数")
+                return  false;
+            }
+            //校验密码
+            if ($.trim(Password) == '' || $.trim(Password).length<=0){
+                layer.alert("密码不能为空");
+                return false;
+            }
+            if($.trim(Password).length<6 ||$.trim(Password).length>16){
+                layer.alert("密码只能是6-16位数");
+                return  false;
+            }
+            if ($.trim(rePassword) == '' || $.trim(rePassword).length<=0){
+                layer.alert("请再次输入密码");
+                return false;
+            }
+            if($.trim(Password) != $.trim(rePassword)){
+                layer.alert("两次密码不一致！");
+                return false;
+            }
+            if ($.trim(Phone) == '' || $.trim(Phone).length<=0){
+                layer.alert("手机号不能为空");
+                return false;
+            }
+            var regphone = /^1([38][0-9]|4[579]|5[0-3,5-9]|6[6]|7[0135678]|9[89])\d{8}$/;
+            if(!regphone.test($.trim(Phone))){
+                layer.alert("请输入正确的手机号");
+                return false;
+            }
+            if($.trim(Email).length<=0||$.trim(Email)==""){
+                layer.alert("邮箱不能为空");
+                return  false;
+            }
+            var regemail = /[\da-zA-Z_]+@[\da-zA-Z]+\.[a-zA-Z]{1,10}/;
+            // var regemail=/^([a-z0-9A-Z]+[-|\\.]?)+[a-z0-9A-Z]@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)+[a-zA-Z]{2,}$/;
+            if(!regemail.test($.trim(Email))){
+                layer.alert("邮箱的格式不正确");
+                return  false;
+            }
+            if($.trim(Code).length<=0||$.trim(Code)==""){
+                layer.alert("验证码不能为空！");
+                return  false;
+            }
+            return true;
+        }
+    </script>
+    <div class="nav_left">
+        <form action="" style="background-color: rgb(214, 221, 213);" class="col-md-10 col-sm-12">
+            <h3 style="text-align:left;margin:10px 100px;">注册天天品茶</h3>
+             <input type="text" id="username" placeholder="输入你的用户名" v-model="user.name"><i class="glyphicon glyphicon-user"></i><span class="errorMessage" style="color: red;">*</span><br>
+             <input type="password" id="password" placeholder="输入你的密码" v-model="user.password"><i class="glyphicon glyphicon-lock"></i><br>
+            <input type="password" id="repassword" placeholder="确认你的密码" v-model="user.repeatpassword"><i class="glyphicon glyphicon-lock"></i><br>
+            <input type="text" id="phone" placeholder="请输入手机号码" v-model="user.phone"><i class="glyphicon glyphicon-phone"></i><br>
+            <input type="text" id="email" placeholder="请输入邮箱" v-model="user.email"><i class="glyphicon glyphicon-envelope"></i><br>
+            <input type="text" id="code" placeholder="验证码" v-model="user.code"><i class="glyphicon glyphicon-check"></i><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <a style="color:red;font-size: 18px; width: 60px;height: 15px;background-color: yellowgreen;" @click="sendCode">获取验证码</a><br>
+            <a @click="register" ><input type="button" @keyup.enter="register" value="注册" style="width:70%;height:35px;background-color:red;color:white"></a><br>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            已有账号？<a href="login" style="color:orange;">立即登录</a>
+
+        </form>
+    </div>
+</div>

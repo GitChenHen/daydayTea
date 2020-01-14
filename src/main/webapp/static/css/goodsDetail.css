@@ -1,0 +1,130 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  color: #333;
+  background-color: #C4DA8F;
+  margin: 1rem 10%;
+}
+.navbar-header {
+  float: none;
+}
+.navbar-header .user {
+  float: right;
+  height: 100px;
+  line-height: 100px;
+  padding-right: 40px;
+}
+.navbar-header .user a {
+  font-size: 18px;
+  margin-left: 30px;
+}
+.navbar-header .user a:hover {
+  color: orange;
+  font-weight: 800;
+}
+a {
+  color: #c60;
+  background-color: transparent;
+  font-weight: bold;
+  text-decoration: none;
+}
+ul {
+  padding: 0;
+}
+li {
+  float: left;
+  padding: 1em;
+  list-style: none;
+}
+#imagelist li {
+  margin: 0px 20px 20px 0px;
+  padding: 0px;
+  display: inline;
+}
+.googsInfo {
+  padding: 10px;
+}
+.googsInfo .leftmain {
+  float: left;
+}
+.googsInfo .rightmain {
+  float: right;
+}
+.googsInfo .rightmain .title p:first-child {
+  font-size: 20px;
+  font-weight: 800;
+}
+.googsInfo .rightmain .price p:nth-child(2) span {
+  color: red;
+  font-size: 18px;
+}
+.googsInfo .rightmain .quatity input {
+  width: 50px;
+  height: 32px;
+  text-align: center;
+}
+.rightmain div {
+  padding: 10px;
+  border-bottom: 1px solid #c60;
+}
+.rightmain div:nth-child(1) {
+  height: 80px;
+}
+.rightmain div:nth-child(2) {
+  height: 180px;
+}
+.rightmain div:nth-child(4) {
+  border-bottom: none;
+}
+.googsComment {
+  width: 100%;
+  padding: 10px 300px;
+  margin-top: 50px;
+  border-top: 3px solid #c60;
+}
+.googsComment .description {
+  float: left;
+  width: 50%;
+  height: 50px;
+  border-right: 1px solid #333;
+}
+.googsComment .comments {
+  display: flex;
+  flex: 1;
+  float: right;
+}
+.main {
+  background-color: #fff;
+  margin-top: 40px;
+}
+.main .detailInfo {
+  margin-bottom: 50px;
+}
+.main .detailInfo ul li {
+  width: 25%;
+}
+.main .comOrder ul li {
+  width: 100%;
+  height: 100px;
+  float: left;
+  border-bottom: 1px solid red;
+}
+.main .comOrder ul li .goodComleft {
+  width: 30%;
+  float: left;
+  padding-right: 50px;
+}
+.main .comOrder ul li .goodComright {
+  width: 70%;
+  float: left;
+}
+.main .comOrder ul li .goodComright a {
+  margin: auto;
+}
+.main .comOrder ul li .comListLeft {
+  width: 20%;
+  float: left;
+}
+.main .comOrder ul li .comListRight {
+  width: 80%;
+  float: left;
+}

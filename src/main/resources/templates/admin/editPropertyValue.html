@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="include/admin/adminHeader::html('产品属性管理')" ></head>
+<body>
+<div th:replace="include/admin/adminNavigator::html" ></div>
+<script>
+    $(function(){
+        var pid = getUrlParms("pid");
+        var data4Vue = {
+            uri:'propertyValues',
+            bean: '',
+            productName: '',
+            pid:0,
+            categoryName:'',
+            cid:0
+        };
+
+        //ViewModel
+        var vue = new Vue({
+            el: '#workingArea',
+            data: data4Vue,
+            mounted:function(){ //mounted　表示这个 Vue 对象加载成功了
+                // this.getProduct(pid);
+                this.list();
+            },
+            methods: {
+                list:function(){
+                    var url = "products/"+pid+"/"+ this.uri;
+                    axios.get(url).then(function(response) {
+                        vue.cid = response.data.cid;
+                        vue.categoryName = response.data.categoryName;
+                        vue.productName = response.data.productName;
+                        vue.bean = response.data.bean;
+                    });
+                },
+                getProduct:function(pid){
+                    var url = "products/"+pid;
+                    axios.get(url).then(function(response) {
+                        vue.product = response.data;
+                        vue.category = vue.product.category;
+                    })
+                },
+                update:function(bean,index){
+                    var url =  this.uri;
+                    var id = bean.id;
+                    $("#pvid"+index).css("border","2px solid yellow");
+                    axios.put(url,bean).then(function(response) {
+                        if(id == response.data.id){
+                            $("#pvid"+index).css("border","2px solid green");
+                        } else{
+                            $("#pvid"+index).css("border","2px solid red");
+                        }
+
+                    });
+                }
+            }
+
+        });
+    });
+
+</script>
+
+<div id="workingArea" >
+    <ol class="breadcrumb">
+        <li><a href="admin_category_list">所有分类</a></li>
+        <li><a :href="'admin_product_list?cid='+cid">{{categoryName}}</a></li>
+        <li class="active">{{productName}}</li>
+        <li class="active">产品属性管理</li>
+    </ol>
+
+    <div class="editPVDiv">
+        <div class="eachPV">
+            <span class="pvName" >许可证编号：</span>
+            <span class="pvValue"><input class="pvValue" :id="'pvid'+1" type="text" v-model="bean.licenseOn" @keyup="update(bean,1)"></span>
+        </div>
+        <div class="eachPV">
+            <span class="pvName" >保质期：</span>
+            <span class="pvValue"><input class="pvValue" :id="'pvid'+2" type="text" v-model="bean.expirationDate" @keyup="update(bean,2)"></span>
+        </div>
+        <div class="eachPV">
+            <span class="pvName" >产地：</span>
+            <span class="pvValue"><input class="pvValue" :id="'pvid'+3" type="text" v-model="bean.producingArea" @keyup="update(bean,3)"></span>
+        </div>
+        <div class="eachPV">
+            <span class="pvName" >省份：</span>
+            <span class="pvValue"><input class="pvValue" :id="'pvid'+4" type="text" v-model="bean.province" @keyup="update(bean,4)"></span>
+        </div>
+        <div class="eachPV">
+            <span class="pvName" >城市：</span>
+            <span class="pvValue"><input class="pvValue" :id="'pvid'+5" type="text" v-model="bean.city" @keyup="update(bean,5)"></span>
+        </div>
+        <div class="eachPV">
+            <span class="pvName" >等级：</span>
+            <span class="pvValue"><input class="pvValue" :id="'pvid'+6" type="text" v-model="bean.grade" @keyup="update(bean,6)"></span>
+        </div>
+        <div class="eachPV">
+            <span class="pvName" >规格：</span>
+            <span class="pvValue"><input class="pvValue" :id="'pvid'+7" type="text" v-model="bean.standard" @keyup="update(bean,7)"></span>
+        </div>
+        <div class="eachPV">
+            <span class="pvName" >储存方法：</span>
+            <span class="pvValue"><input class="pvValue" :id="'pvid'+8" type="text" v-model="bean.storageMethod" @keyup="update(bean,8)"></span>
+        </div>
+        <div class="eachPV">
+            <span class="pvName" >生长季节：</span>
+            <span class="pvValue"><input class="pvValue" :id="'pvid'+9" type="text" v-model="bean.growingSeason" @keyup="update(bean,9)"></span>
+        </div>
+        <div class="eachPV">
+            <span class="pvName" >净含量：</span>
+            <span class="pvValue"><input class="pvValue" :id="'pvid'+0" type="text" v-model="bean.netContent" @keyup="update(bean,0)"></span>
+        </div>
+        <div style="clear:both"></div>
+    </div>
+
+</div>
+
+<div th:replace="include/admin/adminFooter::html" ></div>
+</body>
+</html>

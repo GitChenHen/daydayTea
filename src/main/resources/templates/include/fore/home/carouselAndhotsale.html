@@ -1,0 +1,70 @@
+<!-- 轮播（Carousel）指标  热销茶叶 -->
+<div th:fragment="html" id="myCarousel" class="carousel slide">
+    <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+    </ol>
+    <!-- 轮播（Carousel）项目 -->
+    <p style="text-align: center;font-size: 30px; margin-top: 50px;">----热销茶叶产品----</p>
+    <div class="carousel-inner">
+        <div class="item active">
+            <div class="hot-content">
+                <div class="slide-item">
+                    <ul class="clearfix">
+                        <li v-for="hot,index in hotSales" v-if="index<4" class="col-md-3 col-sm-4 hidden-xs">
+                            <a :href="'product_detail?pid=' + hot.id " class="hot-news">
+                                <div class="news-img">
+                                    <img v-if="null != hot.firstProductImage" :src="'img/productSingle/'+hot.firstProductImage+'.jpg'"/>
+                                </div>
+                                <p class="hot-text"
+                                   title="很好的一款茶叶。在网上买的茶叶不少，从性价比看，这次购买的茶叶排首位。茶汤颜色很正，是正宗岩茶。现在同事们也加入购买的行列了。">
+                                    很好的一款茶叶。在网上买的茶叶不少，从性价比看，这次购买的茶叶排首位。茶汤颜色很正，是正宗岩茶。现在同事们也加入购买的行列了。</p>
+                                <p class="hot-people" title="来自随遇而安的评价">来自随遇而安的评价</p>
+                                <p class="hot-descr clearfix">
+                                    <span title="hot.name">{{hot.name}}</span>
+                                    <span></span>
+                                    <span>￥{{hot.promote_price|formatMoneyFilter}}</span>
+                                </p>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="item">
+            <div class="item active">
+                <div class="hot-content">
+                    <div class="slide-item">
+                        <ul class="clearfix">
+                            <li v-for="hot,index in hotSales" v-if="index>3" class="col-md-3 col-sm-4 hidden-xs">
+                                <a :href="'product_detail?pid=' + hot.id " target="_blank" class="hot-news">
+                                    <div class="news-img">
+                                        <img v-if="null != hot.firstProductImage" :src="'img/productSingle/'+hot.firstProductImage+'.jpg'">
+                                    </div>
+                                    <p class="hot-text" title="傍晚才收到货，包装很严实，也很大气，立即开泡，闻之很香，喝起来也挺香的。感觉物有所值，以后还会再购买
+        ">傍晚才收到货，包装很严实，也很大气，立即开泡，闻之很香，喝起来也挺香的。感觉物有所值，以后还会再购买
+                                    </p>
+                                    <p class="hot-people" title="来自vettelbin的评价">来自vettelbin的评价</p>
+                                    <p class="hot-descr clearfix">
+                                        <span title="hot.name">{{hot.name}}</span>
+                                        <span></span>
+                                        <span>￥{{hot.promote_price|formatMoneyFilter}}</span>
+                                    </p>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 轮播（Carousel）导航 -->
+    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>

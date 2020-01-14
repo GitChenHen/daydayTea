@@ -1,0 +1,63 @@
+<div class="container" style="background:#F5F5F5;margin-top: 100px" th:fragment="html"
+     xmlns:th="http://www.w3.org/1999/xhtml">
+    <div class="row">
+        <table class="table table-bordered table-hover">
+            <thead>
+            <tr>
+                <th>商品图</th>
+                <th>单价</th>
+                <th>数量</th>
+                <th>金额</th>
+                <th>操作</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr v-for="oi in orderItems" class="cartProductItemTR" :oiid="oi.id" selectit="selectit">
+                <td>
+                    <!-- :href="'product_detail?pid=' + p.id"  -->
+                    <a :href="'product_detail?pid=' + oi.product.id">
+                        <img :src="'img/productSingle/'+oi.product.firstProductImage+'.jpg'" width="200" alt="">
+                    </a>
+                </td>
+                <td>
+                    <s>￥{{oi.product.originalPrice|formatMoneyFilter}}</s>
+                    <br>
+                    <b>￥{{oi.product.promotePrice|formatMoneyFilter}}</b>
+                </td>
+                <td>
+                    <span class="hidden orderItemStock " :pid="oi.product.id">{{oi.product.stock}}</span>
+                    <span class="hidden orderItemPromotePrice " :pid="oi.product.id">{{oi.product.promotePrice}}</span>
+                    <button :pid="oi.product.id" type="button" class="btn btn-default numberMinus">-</button>
+                    <input :pid="oi.product.id" :oiid="oi.id" :value="oi.number" class="orderItemNumberSetting" autocomplete="off" >
+                    <button :stock="oi.product.stock" :pid="oi.product.id" type="button" class="btn btn-default numberPlus">+</button>
+                </td>
+                <td>
+                    <span class="cartProductItemSmallSumPrice" :oiid="oi.id" :pid="oi.product.id" >
+                        ￥ {{oi.product.promotePrice*oi.number|formatMoneyFilter}}
+                    </span>
+                </td>
+                <td>
+                    <a class="deleteOrderItem" href="javascript:void(0)" :oiid="oi.id" >删除</a>
+                    <button class="createOrderButtonOne" :oiid="oi.id" >结算</button>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td>
+                    <span class="cartSumNumber"></span>
+                </td>
+                <td>
+                    <span class="cartSumPrice"></span>
+                </td>
+                <td>
+                    <button v-if="orderItems.length != 0" class="createOrderButton">全部结算</button>
+                </td>
+            </tr>
+
+            </tbody>
+        </table>
+
+    </div>
+
+</div>

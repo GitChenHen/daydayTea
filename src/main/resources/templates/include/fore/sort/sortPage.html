@@ -1,0 +1,27 @@
+<div class="cards" th:fragment="html">
+    <div class="tablist">
+        <ul class="nav nav-tabs" role="tablist">
+            <li v-for="c,index in categories" class="active" role="presentation">
+                <a href="#specially_recommend" @click="findProductByCid(c.id)" aria-controls="specially recommend" role="tab"
+                   data-toggle="tab">{{c.name}}</a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="tab-content container-fluid"  style="background-color:goldenrod;padding-bottom: 20px;margin-top: 20px;">
+        <div role="tabpanel" class="tab-pane active" id="greenTea">
+            <div class="row">
+                <div v-for="p in products" class="card col-md-3 col-sm-6 col-xs-12">
+                    <a :href="'product_detail?pid=' + p.id ">
+                        <img v-if="null != p.firstProductImage" :src="'img/productSingle/'+p.firstProductImage+'.jpg'" width="100%" height="100%">
+                    </a>
+                    <div class="info">
+                        <p class="price">￥{{p.promote_price|formatMoneyFilter}}<span>包邮</span>&nbsp;&nbsp;&nbsp;<span>{{p.sales_volume}}人付款</span></p>
+                        <p>{{p.name}}</p>
+                        <p>发货地：长湴</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

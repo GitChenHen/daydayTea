@@ -1,0 +1,89 @@
+//头部注册部分样式
+body{
+    background:url(../images/userAdmin.jpg) no-repeat;width: 100%;height: 100%; background-size:cover;
+}
+.navbar{
+    // 子代选择器
+    .container{
+        padding-bottom: 20px;
+        .navbar-header{
+            margin-left: 80px;
+        }
+        // 登录注册样式
+        .list{
+            .nav_list li a{
+                width: 150px;
+                height: 50px;
+                padding-top:10px;
+                font-size: 18px;
+                line-height: 50px;
+                text-align: center;
+                // 同元素加样式
+                &:hover{
+                    color: red;
+                }
+            }
+            .nav_list li:first-child{
+                  width: 150px;
+                  height: 50px;
+                  border-radius: 20px;
+                  margin-top: 15px;
+                  text-align: center;
+                  border: 1px solid orange;
+                  &:hover{
+                    background-color: #C4DA8F;
+                  }
+            }
+            .nav_list li:nth-child(2),.nav_list li:nth-child(3){
+                margin-top: 15px;
+            }
+            .nav_list li{
+                float: left;
+                list-style: none;
+                margin-left: 25px;
+
+            }
+
+        }
+    }
+}
+
+//注册内容框样式
+form{
+    border: 1px solid #ccc;
+    width: 300px;
+    margin-left:300px;
+}
+.nav_res{
+    width: 100%;
+    margin:100px 10px;
+    background-color: rgb(214, 221, 213);
+}
+.nav_left{
+    width: 50%;
+    float: left;
+}
+.nav_right{
+    width: 50%;
+    float: left;
+}
+form input{
+    width: 200px;
+    height: 40px;
+    margin: 5px 5px;
+
+}
+.container p {
+    width: 100%;
+    height: 10px;
+    margin-top: 10px;
+    text-align: center;
+    border-top: 1px solid #ffff;
+    display: inline-block;
+    font-size: 18px;
+}
+
+.container p:first-child {
+    margin-top: 30PX;
+}
+

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="include/fore/header::html('确认支付页面')">
+</head>
+<link rel="stylesheet" href="static/css/cart.css">
+<script>
+    $(function(){
+        var oid = getUrlParms("oid");
+        var data4Vue = {
+            uri:'foreconfirmPay',
+            order:'',
+            orderItems:[]
+        };
+        //ViewModel
+        var vue = new Vue({
+            el: '#workingArea',
+            data: data4Vue,
+            mounted:function(){ //mounted　表示这个 Vue 对象加载成功了
+                this.load();
+            },
+            methods: {
+                load:function(){
+                    var url =  this.uri+"?oid="+oid;
+                    axios.get(url).then(function(response) {
+                        vue.order = response.data.o;
+                        vue.orderItems = response.data.ois;
+                    });
+                }
+            }
+        });
+
+    })
+</script>
+<body>
+    <div id="workingArea">
+        <!-- 头部 -->
+        <div th:replace="include/fore/cart/cartHeader::html"></div>
+
+        <!-- 确认支付页面内容 -->
+        <div th:replace="include/fore/order/confirmPayPage::html"></div>
+
+        <div th:replace="include/fore/footer::html"></div>
+    </div>
+</body>
+</html>

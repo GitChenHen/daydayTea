@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:include="include/fore/header::html('商品详情')">
+</head>
+<link rel="stylesheet" href="static/lib/css/bootstrap.min.css">
+<link rel="stylesheet" href="static/css/goodsDetail.css">
+<body>
+<script type="text/javascript">
+    $(function () {
+        var pid = getUrlParms("pid");
+        var data4Vue = {
+            uri: 'product_detail',
+            product: '',
+            productImages: [],
+            propertyValue: '',
+            productDetailImages: [],
+            productReviews: [],
+            reviewCount:''
+        };
+        var vue = new Vue({
+            el: '#workingArea',
+            data: data4Vue,
+            mounted: function () { //mounted　表示这个 Vue 对象加载成功了
+                this.getProductInfo(pid);
+                this.getProductDetailAndReview(pid);
+                this.getProductImg(pid);
+            },
+            methods: {
+                getProductInfo: function (pid) {
+                    var url = this.uri + "/" + pid;
+                    axios.get(url).then(function (response) {
+                        vue.product = response.data.data.product;
+                        vue.productImages = response.data.data.pis;
+                        vue.reviewCount = response.data.data.reviewCount;
+                    });
+                },
+                getProductDetailAndReview: function (pid) {
+                    var url = "product_detail_and_review" + "/" + pid;
+                    axios.get(url).then(function (response) {
+                        vue.propertyValue = response.data.data.pv;
+                        vue.productReviews = response.data.data.rs;
+                    });
+                },
+                getProductImg: function (pid) {
+                    var url = "product_img" + "/" + pid;
+                    axios.get(url).then(function (response) {
+                        vue.productDetailImages = response.data.pids;
+                    });
+                }
+            }
+        });
+        var stock = '';
+        $(".productNumberSetting").keyup(function () {
+            stock = $(".stock").val();
+            var num = $(".productNumberSetting").val();
+            num = parseInt(num);
+            if (isNaN(num))
+                num = 1;
+            if (num <= 0)
+                num = 1;
+            if (num > stock)
+                num = stock;
+            $(".productNumberSetting").val(num);
+        });
+        $(".increaseNumber").click(function () {
+            stock = $(".stock").val();
+            var num = $(".productNumberSetting").val();
+            num++;
+            if (num > stock)
+                num = stock;
+            $(".productNumberSetting").val(num);
+        });
+        $(".decreaseNumber").click(function () {
+            stock = $(".stock").val();
+            var num = $(".productNumberSetting").val();
+            --num;
+            if (num <= 0)
+                num = 1;
+            $(".productNumberSetting").val(num);
+        });
+
+
+        $(".addCartButton").removeAttr("disabled");
+        $(".addCartLink").click(function () {
+            var url = "forecheckLogin";
+            axios.get(url).then(function (response) {
+                if (0 == response.data.code) {
+                    var pid = vue.product.id;
+                    var num = $(".productNumberSetting").val();
+                    var url = "foreaddCart?pid=" + pid + "&num=" + num;
+                    axios.get(url).then(function (response) {
+                        var result = response.data;
+                        if (0 == result.code) {
+                            $(".addCartButton").html("已加入购物车");
+                            $(".addCartButton").attr("disabled", "disabled");
+                            $(".addCartButton").css("background-color", "lightgray")
+                            $(".addCartButton").css("border-color", "lightgray")
+                            $(".addCartButton").css("color", "black")
+                        }
+                    });
+                } else {
+                    location.href="login";
+                }
+            });
+        });
+
+        $(".buyLink").click(function () {
+            var url = "forecheckLogin";
+            axios.get(url).then(function (response) {
+                if (0 == response.data.code) {
+                    var pid = vue.product.id;
+                    var num = $(".productNumberSetting").val();
+                    var url = "forebuyone?pid=" + pid + "&num=" + num;
+                    axios.get(url).then(function (response) {
+                        var oiid = response.data;
+                        location.href = "buy?oiid=" + oiid;
+                    });
+                } else {
+                    location.href="login";
+                }
+            });
+            return false;
+        });
+
+
+        $("img.smallImage").click(function () {
+            alert(1);
+            var bigImageURL = $(this).attr("bigImageURL");
+            $("img.bigImg").attr("src", bigImageURL);
+        });
+
+        $("img.bigImg").load(
+            function () {
+                $("img.smallImage").each(function () {
+                    var bigImageURL = $(this).attr("bigImageURL");
+                    var img = new Image();
+                    img.src = bigImageURL;
+                    img.onload = function () {
+                        $("div.img4load").append($(img));
+                    };
+                });
+            }
+        );
+    });
+</script>
+<!-- 头部 -->
+<div th:replace="include/fore/product/productTital::html"></div>
+<div id="workingArea">
+    <div class="row">
+        <div th:replace="include/fore/product/productPage::html"></div>
+        <!-- 详情描述\晒单评价 -->
+        <div th:replace="include/fore/product/productDetailAndReview::html"></div>
+    </div>
+    <!-- 切换详情图片 -->
+    <!--<script>
+        $(function () {
+            $("#imagelist a").click(function () {
+                var href = $(this).attr("href");//获取当前点击的属性值
+                // 设置被选元素的属性和值。
+                $("#image").attr("src", href);
+                return false;
+            })
+        });
+    </script>-->
+    <!-- 登录成功跳转主页面时取出用户名 -->
+    <!--<script>
+    $(window).on('load', function () {
+        var getusername = JSON.parse(sessionStorage.getItem('username'))
+        console.log(getusername)
+        document.getElementById('showusername').innerText = getusername
+        console.log("页面加载完成");
+    });
+</script>-->
+    <div th:replace="include/fore/footer::html"></div>
+</div>
+</body>
+
+</html>

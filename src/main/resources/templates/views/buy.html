@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:include="include/fore/header::html('结算页面')">
+</head>
+<link rel="stylesheet" href="static/css/cart.css">
+<body>
+<script>
+    $(function(){
+        var oiid = getUrlParms("oiid");
+        var data4Vue = {
+            uri:'forebuy',
+            total:0,
+            orderItems:[],
+            order:{address:'',postCode:'',receiver:'',mobile:'',userMessage:''}
+        };
+        //ViewModel
+        var vue = new Vue({
+            el: '#workingArea',
+            data: data4Vue,
+            mounted:function(){ //mounted　表示这个 Vue 对象加载成功了
+                this.load();
+            },
+            methods: {
+                load:function(){
+                    var url =  this.uri+"/?oiid="+oiid;
+                    axios.get(url).then(function(response) {
+                        var result = response.data;
+                        vue.total = result.data.total;
+                        vue.orderItems = result.data.orderItems;
+                    });
+                },
+                submitOrder:function(){
+                    var url =  "forecreateOrder";
+                    axios.post(url,this.order).then(function(response) {
+                        var result = response.data;
+                        var oid = result.data.oid;
+                        var total = result.data.total;
+                        location.href="payment?oid="+oid+"&total="+total;
+                    });
+                }
+            }
+        });
+
+    })
+</script>
+<div id="workingArea" style="background-color:#C4DA8F">
+    <!-- 头部 -->
+    <div th:replace="include/fore/cart/cartHeader::html"></div>
+    <!-- 结算内容 -->
+    <div th:replace="include/fore/cart/buyPage::html" >
+
+    <div th:replace="include/fore/footer::html"></div>
+</div>
+</body>

@@ -1,0 +1,37 @@
+<!-- 最上面头部标题开始 -->
+<header th:fragment="html" style="background: #8FB02D;font-size: 16px;font-weight: 550;"
+        class="container-fluid hidden-sm hidden-xs navbar-fixed-top" xmlns:th="http://www.w3.org/1999/xhtml">
+    <div class="row">
+        <div class="col-md-2">
+            <a href="javascript:void(0)" class="ddpc">
+                <span class="glyphicon glyphicon-phone" aria-hidden="true"></span>
+                品茶手机版
+            </a>
+            <img src="static/images/code.jpg" alt="图片找不到">
+        </div>
+        <div class="col-md-4">
+            <span class="glyphicon glyphicon-phone-alt" aria-hidden="true"></span>
+            产品分类 &nbsp;&nbsp;|&nbsp;&nbsp;
+            <a href="javascript:void(0)"><i
+                    class="glyphicon glyphicon-globe"></i>&nbsp;网站导航</a>&nbsp;&nbsp;
+        </div>
+        <div class="col-md-3" th:if="${null!=session.user}">
+            <a href="#" class="ddpc" style="color: red"><i class="glyphicon glyphicon-user"></i>当前用户：
+                <span id="showusername" th:text="${session.user.name}"></span></a>&nbsp;|
+            <a href="fore_logout" >退出</a>
+        </div>
+        <div class="col-md-3" th:if="${null==session.user}">
+            <a href="register">
+                <button type="button" class="btn btn-primary" target="_blank">免费注册</button>
+            </a>
+            <a href="login" class="ddpc">
+                <button type="button" class="btn btn-success">登陆</button>
+            </a>
+        </div>
+        <div class="col-md-3" th:if="${null!=session.user}">
+            <a href="cartList" class="ddpc"><i
+                    class="glyphicon glyphicon-shopping-cart"></i>购物车</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+            <a href="orderList" class="ddpc"><i class="glyphicon glyphicon-sort-by-order"></i>我的订单</a>
+        </div>
+    </div>
+</header>

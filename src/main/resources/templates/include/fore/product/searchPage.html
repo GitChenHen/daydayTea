@@ -1,0 +1,25 @@
+<div class="container" th:fragment="html" xmlns:th="http://www.w3.org/1999/xhtml">
+    <div class="row">
+        <div class="searchPostion" style="padding:10px;">当前位置：搜索内容</div>
+        <div class="tab-content container-fluid" style="background-color: goldenrod;padding-bottom: 20px;">
+            <!-- 搜索后的显示数据 -->
+            <div role="tabpanel" class="tab-pane active" id="specially_recommend">
+                <div class="row" v-if="products.length > 0">
+                    <div v-for="p in products" class="card col-md-3 col-sm-6 col-xs-12">
+                        <a :href="'product_detail?pid=' + p.id ">
+                            <img :src="'img/productSingle/'+ p.firstProductImage + '.jpg'" width="100%" height="100%" >
+                        </a>
+                        <div class="info">
+                            <p class="price">￥{{p.promote_price|formatMoneyFilter}}<span>包邮</span>&nbsp;&nbsp;&nbsp;<span>{{p.sales_volume}}人付款</span></p>
+                            <p>{{p.name}}</p>
+                            <p>发货地：长湴</p>
+                        </div>
+                    </div>
+                </div>
+                <div v-if="products.length == 0" role="tabpanel" class="tab-pane active">
+                    没有满足条件的产品
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

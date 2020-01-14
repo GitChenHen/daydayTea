@@ -1,0 +1,143 @@
+<div class="nav_res"  th:fragment="html">
+    <script>
+        $(function(){
+            var data4Vue = {
+                uri:'fore_login',
+                result: [],
+                user:{name:'', password:''}
+            };
+            //ViewModel
+            var vue = new Vue({
+                el: '#workingArea',
+                data: data4Vue,
+                mounted:function(){
+                },
+                methods: {
+                    login:function(){
+                        var url =  this.uri;
+                        if (validateCode('#loginCard','#loginCode')){
+                            axios.post(url,this.user).then(function(response) {
+                                var result = response.data;
+                                if(result.code==0){
+                                    window.alert("登录成功！");
+                                    location.href="home";
+                                }
+                                else{
+                                    layer.alert(result.message);
+                                }
+                            });
+                        }
+                    }
+                }
+            });
+        })
+        layui.use(['layer'],function () {
+            var layer = layui.layer;
+        })
+        $(function () {
+            // 页面初始化生成验证码
+            window.onload = createCode('#loginCode');
+            // 验证码切换
+            $('#loginCode').click(function () {
+                createCode('#loginCode');
+            });
+            // 登陆事件
+            $('#loginBtn').click(function () {
+                login();
+            });
+            // 注册事件
+            $('#loginRegister').click(function () {
+                register();
+            });
+        });
+        // 生成验证码
+        function createCode(codeID) {
+            var code = "";
+            // 验证码长度
+            var codeLength = 4;
+            // 验证码dom元素
+            var checkCode = $(codeID);
+            // 验证码随机数
+            var random = [0,1,2,3,4,5,6,7,8,9,'A','B','C','D','E','F','G','H','J','K','L','M','N','O','P','Q','R',
+                'S','T','U','V','W','X','Y','Z'];
+            for (var i = 0;i < codeLength; i++){
+                // 随机数索引
+                var index = Math.floor(Math.random()*36);
+                code += random[index];
+            }
+            // 将生成的随机验证码赋值
+            checkCode.val(code);
+        }
+        // 校验验证码、用户名、密码
+        function validateCode(inputID,codeID) {
+            var inputCode = $(inputID).val().toUpperCase();
+            var cardCode = $(codeID).val();
+            var loginUsername = $('#userName').val();
+            var loginPassword = $('#password').val();
+            if ($.trim(loginUsername) == '' || $.trim(loginUsername).length<=0){
+                layer.alert("用户名不能为空");
+                return false;
+            }
+            if ($.trim(loginPassword) == '' || $.trim(loginPassword).length<=0){
+                layer.alert("密码不能为空");
+                return false;
+            }
+            if (inputCode.length<=0){
+                layer.alert("验证码不能为空");
+                return false;
+            }
+            if (inputCode != cardCode){
+                layer.alert("请输入正确验证码");
+                return false;
+            }
+            return true;
+        }
+    </script>
+    <div class="wrap">
+        <img src="static/images/userAdmin.jpg" height="827" width="1920" class="imgStyle"/>
+        <div class="loginForm">
+            <form>
+                <div class="logoHead">
+                    <h3 style="margin-top: 15px">茶叶购物登录</h3>
+                </div>
+                <div class="usernameWrapDiv">
+                    <div class="usernameLabel">
+                        <label>用户名:</label>
+                    </div>
+                    <div class="usernameDiv">
+                        <i class="layui-icon layui-icon-username adminIcon"></i>
+                        <input id="userName" v-model="user.name" class="layui-input adminInput" type="text" name="username" placeholder="输入用户名" ><i style="top: -27px;left: 178px;" class="glyphicon glyphicon-user"></i>
+                    </div>
+                </div>
+                <div class="usernameWrapDiv">
+                    <div class="usernameLabel">
+                        <label>密码:</label>
+                    </div>
+                    <div class="passwordDiv">
+                        <i class="layui-icon layui-icon-password adminIcon"></i>
+                        <input  id="password"  v-model="user.password" class="layui-input adminInput" type="password" name="password" placeholder="输入密码"><i style="top: -27px;left: 178px;" class="glyphicon glyphicon-lock"></i>
+                    </div>
+                </div>
+                <div class="usernameWrapDiv">
+                    <div class="usernameLabel">
+                        <label>验证码:</label>
+                    </div>
+                    <div class="cardDiv">
+                        <input id="loginCard" class="layui-input cardInput" type="text" name="card" placeholder="输入验证码">
+                    </div>
+                    <div class="codeDiv">
+                        <input id="loginCode" class="layui-input codeInput"  type="button">
+                    </div>
+                </div>
+                <div class="usernameWrapDiv">
+                    <div class="submitLabel">
+                        <label>没有账号？<a href="register">点击注册</a></label>
+                    </div>
+                    <div class="submitDiv">
+                        <input @click="login" @keyup.enter="login" id="loginBtn" type="button" class="submit layui-btn layui-btn-primary" value="登录">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

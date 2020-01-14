@@ -1,0 +1,25 @@
+<div class="navbar-header" style="background:#C4DA8F;height: 100px;width: 100%;margin-bottom: 30px;border-bottom: 2px solid goldenrod;" th:fragment="html"
+     xmlns:th="http://www.w3.org/1999/xhtml">
+    <div class="container">
+        <a href="home" class="navbar-brand">
+                    <span class="ddpc_logo">
+                        <img src="static/images/ddpc_logos.png" style="cursor:pointer" alt="欢迎关注天天品茶"
+                             title="欢迎关注天天品茶" width="150px" height="80px">
+                    </span>
+            <span class="ddpc_title" style="margin: 0px 8px;font-weight: 800">天天品茶</span>
+        </a>
+        <div class="user" th:if="${null!=session.user}">
+            <a href="#" class="ddpc" style="color: red"><i class="glyphicon glyphicon-user"></i>当前用户：
+                <span id="showusername" th:text="${session.user.name}"></span></a>&nbsp;|
+            <a href="fore_logout" >退出</a>
+        </div>
+        <div class="user" th:if="${null==session.user}">
+            <a href="register">
+                <button type="button" class="btn btn-primary" target="_blank">免费注册</button>
+            </a>
+            <a href="login" class="ddpc">
+                <button type="button" class="btn btn-success">登陆</button>
+            </a>
+        </div>
+    </div>
+</div>

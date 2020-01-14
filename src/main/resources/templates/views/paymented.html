@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:include="include/fore/header::html('支付成功')">
+</head>
+<body>
+<div id="workingArea">
+    <!-- 头部 -->
+    <div th:replace="include/fore/cart/cartHeader::html"></div>
+
+    <!-- 支付成功内容 -->
+    <div th:replace="include/fore/order/payedPage::html"></div>
+
+    <div th:replace="include/fore/footer::html"></div>
+</div>
+</body>

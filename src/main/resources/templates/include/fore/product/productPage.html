@@ -1,0 +1,62 @@
+<div class="container" style="margin-top: 100px;background-color: goldenrod;" th:fragment="html">
+
+    <!-- 商品详情部分 -->
+    <div class="googsInfo">
+        <div class="leftmain">
+            <h2>
+                商品详情
+            </h2>
+            <ul id="imagelist">
+                <li v-for="img,index in productImages" v-if="index<4">
+                    <img  name="smallImage" :src="'img/productSingle/' + img + '.jpg'"
+                         :bigImageURL="'img/productSingle/' + img + '.jpg'" width="100" alt="图片1" class="smallImage"/>
+                </li>
+                <div class="img4load hidden"></div>
+            </ul>
+        </div>
+        <div style="clear:both"></div>
+
+        <img id="image" :src="'img/productSingle/'+product.firstProductImage+'.jpg'" width="450" class="bigImg" />
+        <div class="rightmain">
+            <!-- 标题 -->
+            <div class="title">
+                <p>{{product.name}}</p>
+                <p>{{product.subTitle}}</p>
+            </div>
+            <!-- 价钱 -->
+            <div class="price">
+                <p>市场价&nbsp;&nbsp;&nbsp;<s>￥{{product.originalPrice|formatMoneyFilter}}</s></p>
+                <p>天天价&nbsp;&nbsp;&nbsp;<span>￥{{product.promotePrice|formatMoneyFilter}}</span></p>
+                <p>限时降价&nbsp;&nbsp;&nbsp;<button class="btn btn-danger">包邮</button>
+                    全场在线支付满{{product.promotePrice|formatMoneyFilter}}元免运费
+                </p>
+                <p>限时降价&nbsp;&nbsp;&nbsp;<button class="btn btn-danger">直降</button>
+                    已优惠{{(product.originalPrice - product.promotePrice)|formatMoneyFilter}}元
+                </p>
+            </div>
+            <!-- 品牌 -->
+            <div class="brand">
+                销售量：&nbsp;&nbsp;&nbsp;{{product.salesVolume}}&nbsp;&nbsp;&nbsp;&nbsp;库存：&nbsp;&nbsp;{{product.stock}}
+            </div>
+            <input type="text" class="stock" style="display: none" :value="product.stock">
+            <!-- 数量 -->
+            <div class="quatity">
+                数量&nbsp;&nbsp;&nbsp;
+                <button type="button" class="btn btn-default decreaseNumber">-</button>
+                <input type="text" class="productNumberSetting" value="1" name="number" id="inputNum">
+                <button type="button" class="btn btn-default increaseNumber">+</button>
+            </div>
+            <!-- 加入购物车按钮 -->
+            <a class="addCartLink">
+                <button class="btn btn-success glyphicon glyphicon-shopping-cart addCartButton"
+                        id="btnAddCart">
+                    加入购物车
+                </button>
+            </a>
+            <a class="buyLink">
+                <button class="btn btn-danger glyphicon glyphicon-shopping-cart buyLink" id="btnBuy">立即购买
+                </button>
+            </a>
+        </div>
+    </div>
+</div>

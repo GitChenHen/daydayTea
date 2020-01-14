@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:include="include/fore/header::html('评价页面')">
+</head>
+<link rel="stylesheet" href="static/css/comment.css">
+<script>
+    $(function () {
+        var oid = getUrlParms("oid");
+        var data4Vue = {
+            uri: 'forereview',
+            o: '',
+            orderItems: [],
+            showReviews: false,
+            content: ''
+        };
+        //ViewModel
+        var vue = new Vue({
+            el: '#workingArea',
+            data: data4Vue,
+            mounted: function () { //mounted　表示这个 Vue 对象加载成功了
+                this.load();
+            },
+            methods: {
+                load: function () {
+                    var url = this.uri + "?oid=" + oid;
+                    axios.get(url).then(function (response) {
+                        var result = response.data;
+                        vue.orderItems = result.data.ois;
+                        vue.o = result.data.o;
+                    });
+                },
+                doreview: function () {
+                    var pid = $("div #pid").attr("pid");
+                    var url = "foredoreview?oid=" + vue.o.id + "&pid=" + pid + "&content=" + vue.content;
+                    axios.post(url).then(function (response) {
+                        var result = response.data;
+                        vue.showReviews = true;
+                        vue.load();
+                    });
+                }
+            }
+        });
+    });
+</script>
+<body>
+<div id="workingArea">
+    <div th:replace="include/fore/order/reviewHeader::html"></div>
+    <!-- 评价页面内容 -->
+    <div th:replace="include/fore/order/reviewPage::html"></div>
+    <div th:replace="include/fore/footer::html"></div>
+</div>
+</body>
+
+</html>

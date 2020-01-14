@@ -1,0 +1,55 @@
+<nav class="navbar navbar-default" style="background:#C4DA8F;" th:fragment="html" xmlns:th="http://www.w3.org/1999/xhtml">
+    <div class="container">
+        <!-- 导航最左边 -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="home" class="navbar-brand">
+                    <span class="ddpc_logo">
+                        <img src="static/images/ddpc_logos.png" style="cursor:pointer" alt="图片找不到" title="欢迎关注天天品茶" width="150px" height="80px">
+                    </span>
+                <span class="ddpc_title" style="margin: 0px 8px;">天天品茶</span>
+            </a>
+        </div>
+        <!-- 导航列表 -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav" id="navMenu">
+                <li><a href="#">首页</a></li>
+                <li><a href="#">公司简介</a></li>
+                <li><a href="#">订单详情</a></li>
+                <!--goodSortList.html-->
+                <li><a :href="'good_sort_list'">商品分类</a></li>
+                <li><a href="#">收藏夹</a></li>
+            </ul>
+            <!-- 搜索框 -->
+            <ul class="nav navbar-nav navbar-right hidden-sm hidden-xs">
+<!--                <li><a href="#">个人中心</a></li>-->
+                <a href="javascript:void(0)" @click="searchProduct">
+                    <span class="glyphicon glyphicon-search" aria-hidden="true" style="margin-top:30px;"></span>
+                </a>
+                <li style="width: 220px;height: 40px; line-height: 40px;margin:18px 10px;">
+                    <input name="keyword" id="keyword" type="text" placeholder="请输入搜索的内容" style="width: 220px;height: 40px;">
+                </li>
+            </ul>
+            <!-- 鼠标经过导航显示二级菜单 -->
+            <div class="subNav" id="subNav" style="display: none">
+                <ul>
+                    <li><a href="javascript:void(0)">二级菜单未更新</a></li>
+                    <li><a href="javascript:void(0)">二级菜单未更新</a></li>
+                    <li><a href="javascript:void(0)">二级菜单未更新</a></li>
+                    <li><a href="javascript:void(0)">二级菜单未更新</a></li>
+                    <li><a href="javascript:void(0)">二级菜单未更新</a></li>
+                    <li><a href="javascript:void(0)">二级菜单未更新</a></li>
+                    <li><a href="javascript:void(0)">二级菜单未更新</a></li>
+                    <li><a href="javascript:void(0)">二级菜单未更新</a></li>
+                    <li><a href="javascript:void(0)">二级菜单未更新</a></li>
+                    <li><a href="javascript:void(0)">二级菜单未更新</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</nav>

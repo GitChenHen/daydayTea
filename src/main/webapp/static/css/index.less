@@ -1,0 +1,342 @@
+@charset "UTF-8";
+
+body {
+    color: #000;
+    font-weight: 800;
+}
+
+// 定义变量 导入颜色
+//@ddpc_color: red;
+
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+.ddpc_scrollTop {
+    .ddpc_backToTop {
+        width: 60px;
+        height: 50px;
+        line-height: 50px;
+        text-align: center;
+        font-size: 18px;
+        // border-radius: 50%;
+        position: fixed;
+        right: 8px;
+        bottom: 250px;
+        z-index: 999;
+        background-color: orange;
+       // display: block;//先设置隐藏
+    }
+    //.ddpc_backToTop.active{
+    //    display: block;
+    //}
+}
+
+
+// 最上面头部标题开始样式
+.container-fluid .row a {
+    color: inherit;
+}
+
+// 头部标题导航样式
+// .container-fluid {
+//     // border-bottom: 1px solid #000;
+// }
+
+header {
+    .row>div {
+        height: 45px;
+        line-height: 45px;
+        text-align: center;
+        border-right: 1px solid #000;
+    }
+}
+
+header .row .ddpc~img {
+    position: absolute;
+    display: none;
+    z-index: 15;
+    left: 50px;
+    top: 48px;
+}
+
+header .row .ddpc:hover~img {
+    display: block;
+}
+
+//   logo处导航样式
+.navbar {
+    margin-top: 45px;
+    margin-bottom: 0px;
+
+    .container {
+        .collapse {
+            position: relative;
+
+            .nav li a {
+                font-size: 14px;
+            }
+
+            .subNav {
+                // display: none;
+                position: absolute;
+                width: 800px;
+                height: 200px;
+                top: 80px;
+                left: 150px;
+                z-index: 999;
+                opacity: 0.7;
+                background-color: #C4DA8F;
+
+                ul li {
+                    width: 100px;
+                    height: 40px;
+                    text-align: center;
+                    list-style: none;
+                    float: left;
+
+                    a {
+                        width: 100px;
+                        height: 40px;
+                        line-height: 40px;
+                        text-align: center;
+                        display: block;
+                        text-decoration: none;
+                        color: #000;
+                    }
+                }
+
+                ul li a:hover {
+                    font-size: 18px;
+                    font-weight: bold;
+                    color: rgb(5, 235, 74);
+                    background-color: rgb(252, 87, 87);
+                }
+            }
+        }
+    }
+}
+
+.navbar .navbar-toggle {
+    top: 13px;
+}
+
+.navbar .navbar-brand {
+    height: 80px;
+    padding: 0px;
+    margin-left: 10px;
+}
+
+.navbar .navbar-brand .ddpcfont-logo {
+    height: 80px;
+    line-height: 80px;
+    font-size: 70px;
+    color: red;
+}
+
+.navbar .navbar-brand .ddpcfont-name {
+    height: 80px;
+    line-height: 80px;
+    font-size: 70px;
+    margin: 0 20px 0 10px;
+}
+
+.navbar .navbar-nav li a {
+    height: 80px;
+    line-height: 80px;
+    padding: 0 15px;
+}
+
+.navbar .navbar-nav li a:active,
+.navbar .navbar-nav li a:hover,
+.navbar .navbar-nav li a:focus {
+    border-bottom: 3px solid red;
+}
+
+// 轮播图样式
+.carousel .carousel-inner img {
+    width: 100%;
+}
+
+/* 鼠标移动到图片上面和底部会显示蓝色 */
+.ddpclist {
+    margin: 40px 0 20px 0;
+
+    .item {
+        margin-top: 15px;
+    }
+
+    .item:hover {
+        box-shadow: 0px 6px 20px 5px rgb(124, 213, 248);
+        transform: translateY(-5px);
+        // 透明度
+        /* perspective: 4px; */
+        /* transform: scale(1.5); */
+        transition: all 0.5s;
+    }
+}
+
+// 排队信息样式
+.queue {
+    height: 70px;
+    border-top: 1px solid #000;
+    border-bottom: 1px solid #000;
+}
+
+.queue .row {
+    padding-top: 25px;
+}
+
+.queue .row a:nth-child(2) {
+    color: red;
+    display: inline-block;
+    border-bottom: 2px dashed orangered;
+}
+
+.cards .tablist {
+    width: 100%;
+    overflow: hidden;
+    ul li{
+        width: 80px;
+        text-align: center;
+        font-size: 15px;       
+    }
+}
+.card{
+    padding:20px;
+    border-right: 1px solid red;
+    border-bottom: 1px solid red;
+    .info{
+        padding: 5px;
+        background-color: rgb(48, 46, 41);
+        p{
+            color: #fff;
+            &:first-child{
+                color: orange;
+                font-size: 16px;
+            }
+            &:last-child{               
+                margin-left: 240px;
+            }
+            span:last-child{
+                float: right;
+                // 斜体
+                font-style: italic;
+                color: #ccc;
+            }
+            i{
+                color: red;
+                font-weight: bold;
+                letter-spacing: 1em;
+            }
+        }
+    }
+}
+.cards .card a {
+    width: 100%;
+    height: 230px;
+    display: flex;
+    display: -webkit-box;
+    display: -webkit-flexbox;
+    margin: 30px 10px 25px 0px;
+    -webkit-box-shadow: 0 0 10px 8px #ccc;
+    box-shadow: 0 0 10px 8px #ccc;
+}
+
+footer {
+    border-top: 3px solid #ccc;
+    padding-bottom: 15px;
+
+    .footer_list {
+        margin-top: 30px;
+
+        dt {
+            margin-bottom: 10px;
+        }
+
+        dd {
+            margin-top: 5px;
+        }
+
+        .online {
+            text-align: center;
+            border-right: 1px solid #000;
+
+            p:first-child {
+                color: green;
+            }
+
+            .online_phone {
+                display: block;
+                margin-top: 50px;
+                border: 1px solid green;
+            }
+
+            .online_phone:hover {
+                background-color: orange;
+                text-decoration: none;
+            }
+        }
+    }
+}
+
+.end {
+    padding-top: 30px;
+    border-top: 3px solid #ccc;
+
+    .right a {
+        margin-left: 50px;
+    }
+}
+
+// 热销产品
+.hot-content {
+    margin-left: 32px;
+}
+
+.hot-content .slide-item ul li {
+    list-style: none;
+    float: left;
+    width: 20%;
+    height: 500px;
+    text-align: center;
+    margin: 50px 30px;
+    background-color: #fff;
+}
+
+.hot-content .slide-item ul li a {
+    width: 100%;
+    height: 100px;
+    text-decoration: none;
+
+    .hot-text {
+        color: black;
+        margin: 10px;
+        cursor: pointer;
+
+    }
+
+    .hot-people {
+        color: #ccc;
+        left: 84px;
+        position: absolute;
+        bottom: 60px;
+    }
+
+    .hot-descr {
+        position: absolute;
+        bottom: 10px;
+        left: 40px;
+
+        span:nth-child(2) {
+            margin: 0 5px;
+            border-right: 2px solid #ccc;
+        }
+
+        span:nth-child(3) {
+            color: red;
+        }
+    }
+}

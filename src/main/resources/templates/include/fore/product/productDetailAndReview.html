@@ -1,0 +1,70 @@
+<div class="main" th:fragment="html">
+    <!-- 底部评价部分 -->
+    <div class="googsComment">
+        <div class="description">
+            <a href="#detailDes" role="tab" data-toggle="tab">详情描述</a>
+        </div>
+        <div class="comments">
+            <a href="#orderCom" role="tab" data-toggle="tab">晒单评价<span>({{reviewCount}}+)</span></a>
+        </div>
+    </div>
+    <div class="tab-content container-fluid">
+        <!-- 详情描述 -->
+        <div role="tabpanel" class="tab-pane active" id="detailDes">
+            <div class="row">
+                <div class="card col-md-12 col-sm-6 col-xs-12">
+                    <div class="detailInfo" style="align-items: center;text-align: center">
+                        <ul>
+                            <li v-if="'' != propertyValue.producingArea">产地：{{propertyValue.producingArea}}</li>
+                            <li v-if="'' != propertyValue.licenseOn">许可证编号：{{propertyValue.licenseOn}}</li>
+                            <li v-if="'' != propertyValue.province">省份：{{propertyValue.province}}</li>
+                            <li v-if="'' != propertyValue.city">城市：{{propertyValue.city}}</li>
+                            <li v-if="'' != propertyValue.storageMethod">储藏方法：{{propertyValue.storageMethod}}</li>
+                            <li v-if="'' != propertyValue.expirationDate">保质期：{{propertyValue.expirationDate}}</li>
+                            <li v-if="'' != propertyValue.grade">等级：{{propertyValue.grade}}</li>
+                            <li v-if="'' != propertyValue.standard">包装类型：{{propertyValue.standard}}</li>
+                            <li v-if="'' != propertyValue.growingSeason">绳子季节：{{propertyValue.growingSeason}}</li>
+                            <li v-if="'' != propertyValue.netContent">净含量：{{propertyValue.netContent}}</li>
+                        </ul>
+                    </div>
+                    <div v-for="pi in productDetailImages" class="detailImg" style="align-items: center;text-align: center">
+                        <img :src="'img/productDetail/' + pi + '.jpg'">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 晒单评价 -->
+        <div role="tabpanel" class="tab-pane" id="orderCom">
+            <div class="row">
+                <div class="card col-md-12 col-sm-6 col-xs-12">
+                    <div class="comOrder">
+                        <ul>
+                            <!-- 评论列表 -->
+                            <li v-for="review in productReviews">
+                                <div class="comListLeft">
+                                    <span>匿名</span>
+                                </div>
+                                <div class="comListRight">
+                                    <div class="text">{{review.content}}</div>
+                                    <div class="time">{{review.createTime|formatDateFilter}}</div>
+                                </div>
+                            </li>
+                            <!--<li>-->
+                                <!--<div class="comListLeft">-->
+                                    <!--<img src="../static/images/code.jpg" alt="" width="50px" height="50px">-->
+                                    <!--<span>匿名</span>-->
+                                <!--</div>-->
+                                <!--<div class="comListRight">-->
+                                    <!--<div class="text">-->
+                                        <!--不错，与描述的一样，有赠品，收到后特意打开一包掰开后里面金花不少，味道和以前喝过的差不多，客服发货快，有诚信，就是包装破了，不过还好，里面的产品不缺。满意。五分-->
+                                    <!--</div>-->
+                                    <!--<div class="time">2019-11-21</div>-->
+                                <!--</div>-->
+                            <!--</li>-->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

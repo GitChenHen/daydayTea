@@ -1,0 +1,113 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>用户登录</title>
+    <link rel="stylesheet" href="static/layui/css/login.css">
+    <link rel="stylesheet" href="static/layui/css/layui.css">
+
+    <script>
+        $(function(){
+            var data4Vue = {
+                uri:'fore_login',
+                result: [],
+                user:{name:'', password:''}
+            };
+            //ViewModel
+            var vue = new Vue({
+                el: '#workingArea',
+                data: data4Vue,
+                mounted:function(){
+                },
+                methods: {
+                    login:function(){
+                        var url =  this.uri;
+                        if(0==this.user.name.length){
+                            $("span.errorMessage").html("请输入用户名");
+                            $("div.loginErrorMessageDiv").css("visibility","visible");
+                            return;
+                        }
+                        if(0==this.user.password.length){
+                            $("span.errorMessage").html("请输入密码");
+                            $("div.loginErrorMessageDiv").css("visibility","visible");
+                            return;
+                        }
+
+                        axios.post(url,this.user).then(function(response) {
+                            var result = response.data;
+                            if(result.code==0){
+                                location.href="home";
+                            }
+                            else{
+                                $("span.errorMessage").html(result.message);
+                                $("div.loginErrorMessageDiv").css("visibility","visible");
+                            }
+                        });
+                    }
+                }
+            });
+        })
+    </script>
+</head>
+
+<body style="background-color: #C4DA8F;">
+<script src="static/layui/js/layui.js"></script>
+<form class="layui-form" action="" method="post">
+    <div class="container">
+        <button class="close" title="关闭">X</button>
+        <div class="layui-form-mid layui-word-aux">
+            <!-- <img id="logoid" src="../images/user.jpg" height="35">    -->
+            <h2 style="margin:0px 0px 30px 150px">用户登录</h2>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">用户名</label>
+            <div class="layui-input-block">
+                <input type="text" name="title" id="userName"  v-model="user.name" required  lay-verify="required" placeholder="请输入用户名" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">密 &nbsp;&nbsp;码</label>
+            <div class="layui-input-inline">
+                <input type="password" name="password" id="password" v-model="user.password" required lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
+            </div>
+            <!-- <div class="layui-form-mid layui-word-aux">辅助文字</div> -->
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">验证码</label>
+            <div class="layui-input-inline">
+                <input type="text" name="title" required  lay-verify="required" placeholder="请输入验证码" autocomplete="off" class="layui-input verity">
+            </div>
+
+        </div>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn" lay-submit lay-filter="formDemo">登陆</button>
+            </div>
+        </div>
+        <a href="" class="font-set">忘记密码?</a>  <a href="register" class="font-set">立即注册</a>
+    </div>
+</form>
+<script>
+    layui.use(['form', 'layedit', 'laydate'], function(){
+        var form = layui.form
+            ,layer = layui.layer
+            ,layedit = layui.layedit
+            ,laydate = layui.laydate;
+
+        //监听提交
+        form.on('submit(demo1)', function(data){
+            layer.alert(JSON.stringify(data.field), {
+                title: '最终的提交信息'
+            })
+            return false;
+        });
+    });
+</script>
+
+</body>
+
+</html>

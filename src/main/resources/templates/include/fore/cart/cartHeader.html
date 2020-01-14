@@ -1,0 +1,29 @@
+<div th:fragment="html" xmlns:th="http://www.w3.org/1999/xhtml">
+    <nav class="navbar navbar-default navbar-fixed-top" style="background:#C4DA8F;height: 100px;">
+        <div class="container">
+            <div class="navbar-header">
+                <a href="home" class="navbar-brand">
+                    <span class="ddpc_logo">
+                        <img src="static/images/ddpc_logos.png" style="cursor:pointer" alt="欢迎关注天天品茶"
+                             title="欢迎关注天天品茶" width="150px"  height="80px">
+                    </span>
+                    <span class="ddpc_title" style="margin: 0px 8px;">天天品茶</span>
+                </a>
+            </div>
+            <div class="collapse navbar-collapse">
+                <!-- 头部导航 -->
+                <ul class="nav navbar-nav navbar-right hidden-sm hidden-xs">
+                    <li>
+                        <div style="height: 100px;line-height: 100px;" class="user">
+                            <a href="#" class="ddpc" style="color: red"><span class="glyphicon glyphicon-user" style="font-size: 18px">
+                                当前用户：</span><span style="font-size: 18px;color: orange" is="showusername" th:text="${session.user.name}"></span></a>&nbsp;|
+                            <a href="home"><span style="font-size: 18px;color: orange" class="glyphicon glyphicon-share-alt">返回首页</span></a>
+<!--                            <span class="glyphicon glyphicon-user" style="font-size: 18px">当前用户：</span><span is="showusername" th:text="${session.user.name}"></span>-->
+<!--                            <a href="home"><span class="glyphicon glyphicon-share-alt">返回首页</span></a>-->
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>

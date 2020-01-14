@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:include="include/fore/header::html('我的订单')">
+</head>
+<link rel="stylesheet" href="static/lib/css/bootstrap.min.css">
+<style>
+    body {
+        font-size: 12px;
+    }
+
+    a:hover {
+        color: red;
+    }
+    /*.back {*/
+    /*    font-size: 18px;*/
+    /*    padding: 40px 10px;*/
+    /*    float: right;*/
+    /*}*/
+    .user {
+        float: right;
+        height: 100px;
+        line-height: 100px;
+        padding-right: 40px;
+    }
+     .user a {
+        font-size: 18px;
+        margin-left: 30px;
+    }
+        .user a:hover {
+        color: orange;
+        font-weight: 800;
+    }
+</style>
+<body  style="background-color: #C4DA8F">
+<script>
+    $(function(){
+        var data4Vue = {
+            uri:'foreorder',
+            orders:[]
+        };
+        //ViewModel
+        var vue = new Vue({
+            el: '#workingArea',
+            data: data4Vue,
+            mounted:function(){ //mounted　表示这个 Vue 对象加载成功了
+                this.load();
+            },
+            methods: {
+                load:function(){
+                    var url =  this.uri;
+                    axios.get(url).then(function(response) {
+                        vue.orders = response.data;
+                        vue.$nextTick(function(){
+                            orderPageRegisterListeners();
+                        })
+                    });
+                }
+            }
+        });
+    })
+    var deleteOrder = false;
+    var deleteOrderid = 0;
+
+    function orderPageRegisterListeners(){
+        $("a[orderStatus]").click(function(){
+            var orderStatus = $(this).attr("orderStatus");
+            if('all'==orderStatus){
+                $("table[orderStatus]").show();
+            }
+            else{
+                $("table[orderStatus]").hide();
+                $("table[orderStatus="+orderStatus+"]").show();
+            }
+
+            $("div.orderType div").removeClass("selectedOrderType");
+            $(this).parent("div").addClass("selectedOrderType");
+        });
+
+        $("a.deleteOrderLink").click(function(){
+            deleteOrderid = $(this).attr("oid");
+            deleteOrder = false;
+            $("#deleteConfirmModal").modal("show");
+        });
+
+        $("button.deleteConfirmButton").click(function(){
+            deleteOrder = true;
+            $("#deleteConfirmModal").modal('hide');
+        });
+
+        $('#deleteConfirmModal').on('hidden.bs.modal', function (e) {
+            if(deleteOrder){
+                var uri = "foredeleteOrder?oid="+deleteOrderid;
+                axios.put(uri).then(function(response){
+                    if(0==response.data.code){
+                        $("table.orderListItemTable[oid="+deleteOrderid+"]").hide();
+                    }
+                    else{
+                        location.href="login";
+                    }
+                });
+            }
+        })
+    }
+</script>
+<div id="workingArea">
+    <!-- 订单页面头部 -->
+    <div th:replace="include/fore/order/orderHeader::html"></div>
+    <!-- 订单页面内容 -->
+    <div th:replace="include/fore/order/orderPage::html"></div>
+    <!-- 删除模块窗口 -->
+    <div th:replace="include/fore/cart/modal4deleteConfirm::html"></div>
+    <div th:replace="include/fore/footer::html"></div>
+</div>
+</body>
+
+</html>

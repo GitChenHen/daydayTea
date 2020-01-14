@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:include="include/fore/header::html('天天品茶商城')">
+</head>
+<link rel="stylesheet" href="static/css/index.css">
+<style>
+    /* 侧边栏样式 */
+    .nav_menu{
+        /* border:1px solid #ccc; */
+        position: fixed;
+        top: 50%;
+        margin-top: -148px;
+        right: 8px;
+        z-index: 999;
+    }
+    .nav_menu ul li{
+        width:60px;
+        height: 70px;
+        border-bottom: 1px solid #ccc;
+        background-color: #fff;
+        text-align: center;
+        list-style: none;
+    }
+    .nav_menu ul li div{
+        width: 100%;
+        font-size: 28px;
+        height: 48px;
+        line-height: 48px;
+        color: #ccc;
+
+    }
+    .nav_menu ul li i{
+        font-size: normal;
+    }
+   </style>
+<script type = "text/javascript">
+    window.onload = function () {
+        var selecta = document.getElementById("navMenu");
+        var sub = document.getElementById("subNav");
+        selecta.onmouseover = function () {
+            sub.style.display = "block";
+        };
+        sub.onmouseleave = function () {
+            sub.style.display = "none";
+        }
+    };
+</script>
+<body>
+<div id="workingArea" style="background-color: #C4DA8F;">
+    <!-- 最上面头部标题开始 -->
+    <div th:replace="include/fore/home/headerTitle::html"></div>
+    <!-- 头部导航开始 -->
+    <div th:replace="include/fore/home/headerAndnavigation::html"></div>
+    <!-- 页面内容 -->
+    <div th:replace="include/fore/home/homeContent::html"></div>
+    <!-- 底部内容 -->
+    <div th:replace="include/fore/footer::html"></div>
+</div>
+
+</body>
+</html>

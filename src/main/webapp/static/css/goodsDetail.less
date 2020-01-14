@@ -1,0 +1,99 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #333;
+    background-color: #ccc;
+    margin: 1rem 10%;
+}
+.navbar-header{
+    float: none;
+    .user{
+    float: right;
+    height: 100px;
+    line-height: 100px;
+    padding-right: 40px;
+    a{
+        font-size: 18px;
+        margin-left: 30px;
+        &:hover{
+            color: orange;
+            font-weight: 800;
+        }
+    }
+}
+}
+//商品详情样式
+a {
+    color: #c60;
+    background-color: transparent;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+ul {
+    padding: 0;
+}
+
+li {
+    float: left;
+    padding: 1em;
+    list-style: none;
+}
+
+#imagelist li {
+    margin: 0px 20px 20px 0px;
+    padding: 0px;
+    display: inline;
+}
+
+// less格式自动转换为css和wxss
+.googsInfo{
+    padding: 10px;
+    .leftmain{
+        float: left;
+    }
+    .rightmain{
+        float: right;
+        .title p:first-child{
+            font-size: 20px;
+            font-weight: 800;        
+        }
+        .price p:nth-child(2) span{
+            color: red;
+            font-size: 18px;
+        }
+        .quatity input{
+            width: 50px;
+            height: 32px;
+            text-align: center;
+        }
+    }
+}
+
+.rightmain div{    
+    padding: 10px;
+    border-bottom: 1px solid #c60;
+}
+.rightmain div:nth-child(1){
+    height: 80px;
+}
+.rightmain div:nth-child(2){
+    height: 180px;
+}
+.rightmain div:nth-child(4){
+    border-bottom: none;
+}
+// 底部评价样式
+.googsComment{
+    padding: 10px 300px;
+    margin-top: 50px;
+    border-top: 3px solid #c60;
+    .description{
+        float: left;
+        width: 50%;
+        border-right:1px solid #333; 
+    }
+    .comments{
+        float: right;
+        
+    }
+}

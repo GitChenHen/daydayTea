@@ -1,0 +1,69 @@
+body {
+  background: url(../images/userAdmin.jpg);
+}
+.navbar .container {
+  padding-bottom: 20px;
+}
+.navbar .container .navbar-header {
+  margin-left: 80px;
+}
+.navbar .container .list .nav_list li a {
+  width: 150px;
+  height: 50px;
+  padding-top: 10px;
+  font-size: 18px;
+  line-height: 50px;
+  text-align: center;
+}
+.navbar .container .list .nav_list li a:hover {
+  color: red;
+}
+.navbar .container .list .nav_list li:first-child {
+  width: 150px;
+  height: 50px;
+  border-radius: 20px;
+  margin-top: 15px;
+  text-align: center;
+  border: 1px solid orange;
+}
+.navbar .container .list .nav_list li:first-child:hover {
+  background-color: #C4DA8F;
+}
+.navbar .container .list .nav_list li:nth-child(2),
+.navbar .container .list .nav_list li:nth-child(3) {
+  margin-top: 15px;
+}
+.navbar .container .list .nav_list li {
+  float: left;
+  list-style: none;
+  margin-left: 25px;
+}
+form {
+  border: 1px solid #ccc;
+  width: 50%;
+  margin-left: 50px;
+}
+.nav_res {
+  width: 80%;
+  margin: 100px 10px;
+  background-color: #7ecfdd;
+}
+.nav_left {
+  width: 50%;
+  float: left;
+}
+.nav_left form a:hover{
+  cursor: pointer;
+}
+.nav_right {
+  width: 50%;
+  float: left;
+}
+form input {
+  width: 70%;
+  height: 40px;
+  margin: 5px 5px;
+  text-indent: 2em;
+  outline: none;
+  border-radius: 20px;
+}

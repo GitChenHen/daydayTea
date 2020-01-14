@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:include="include/fore/header::html('搜索结果页面')">
+</head>
+<link rel="stylesheet" href="static/css/searchShow.css">
+<script>
+    $(function () {
+        var keyword = getUrlParms("keyword");
+        var data4Vue = {
+            uri: 'foresearch',
+            products: []
+        };
+        //ViewModel
+        var vue = new Vue({
+            el: '#workingArea',
+            data: data4Vue,
+            mounted: function () { //mounted　表示这个 Vue 对象加载成功了
+                this.load();
+            },
+            methods: {
+                load: function () {
+                    var url = this.uri + "?keyword=" + keyword;
+                    axios.post(url).then(function (response) {
+                        vue.products = response.data.data;
+                    });
+                }
+            }
+        });
+    })
+</script>
+<body>
+<div id="workingArea">
+    <!-- 搜索页面头部 -->
+    <div th:replace="include/fore/product/searchHeader::html"></div>
+    <!-- 搜索页面内容 -->
+    <div th:replace="include/fore/product/searchPage::html"></div>
+
+    <div th:replace="include/fore/footer::html"></div>
+</div>
+</body>
+
+</html>

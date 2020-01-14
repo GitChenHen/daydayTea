@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:include="include/fore/header::html('天天品茶登录窗口')">
+    <script src="../../../webapp/static/layui/js/jquery-3.4.1.js"></script>
+    <link rel="stylesheet" href="static/layui/css/layui.css">
+</head>
+
+<link rel="stylesheet" href="static/layui/css/login.css">
+<body>
+<script src="static/layui/js/layui.js"></script>
+<div id="workingArea">
+    <!-- 头部 -->
+    <div th:replace="include/fore/login/loginHeader::html"></div>
+    <!-- 注册内容 -->
+    <div th:replace="include/fore/login/loginPage::html"></div>
+
+</div>
+</body>
+</html>
